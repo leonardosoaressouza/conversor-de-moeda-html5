@@ -1,132 +1,44 @@
 <!doctype html>
-
 <html>
-
-	<head>
-
-		<meta charset="utf-8">
-
-		<title>Conversor de Moeda - Saída</title>
-
-
-		
-
-		<script>
-
-		
-
-			function voltar(){
-
-				// voltar para entrada
-
-				location.href = "entrada.html";
-
-			}
-
-			
-
-			function callback(){
-
-				console.log("Caiu aqui");
-
-				var oResponse = this;
-
-				var sResponseBody = oResponse.responseText;
-
-				var oJSON = JSON.parse(sResponseBody);
-
-				var sReais = oJSON.rates.BRL;
-
-				console.log(sReais);
-
-				
-
-				// AQUI
-
-				var oUrl = new URL(location.href);
-
-				var sValorOrigem = oUrl.searchParams.get("valor_origem");
-
-				console.log(sValorOrigem);
-
-				
-
-				document.querySelector("#valor_destino").value = sReais * sValorOrigem;
-
-			}
-
-			
-
-			function chamaAPI(){
-
-				const sURL = "https://api.exchangeratesapi.io/latest";
-
-				var oRequest = new XMLHttpRequest();
-
-				oRequest.addEventListener("load", callback  );
-
-				
-
-				// oRequest.addEventListener("load", function(){ 
-
-				// 	callback(this.responseText);
-
-				// }  );
-
-				
-
-				oRequest.open("GET", sURL);
-
-				oRequest.send();
-
-				console.log("depois do send");
-
-			}
-
-			
-
-			window.onload = function (){
-
-				chamaAPI();
-
-			}
-
-			
-
-			
-
-		</script>
-
-		
-
-	</head>
-
-	<body>
-
-		
-
-        <label>Moeda de destino</label>
-
-        <input type="text" value="BRL" disabled>
-
-        <br />
-
-        <label>Valor de destino</label>
-
-        <input id="valor_destino" type="number" disabled >
-
-        
-
-        <br />
-
-		<button type="button" onclick="voltar()">
-
-		 Voltar
-
-		</button>
-
+   <head>
+      <meta charset="utf-8">
+      <title>Conversor de Moeda - Saída</title>
+      <script>
+         function voltar(){
          
-
-	</body>
-
+         	// voltar para entrada
+         
+         	location.href = "entrada.html";
+         
+         }
+         
+         
+         window.onload = function (){
+         
+         	chamaAPI();
+         
+         }
+         
+         
+         
+      </script>
+   </head>
+   <body>
+      <label>Moeda de destino</label>
+      <input type="text" value="BRL" disabled>
+      <br />
+      <label>Valor de destino</label>
+      <input id="valor_destino" type="number" disabled >
+      <br />
+      <button type="button" onclick="voltar()">
+      Voltar
+      </button>
+      
+      <script src="logica.js">
+      	
+      	
+      </script>
+      
+   </body>
 </html>
+
